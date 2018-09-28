@@ -39,16 +39,11 @@ def handler(clientsock,addr):
         data = data.decode('UTF-8')
 
 	# Command list
-        t_cmds = ["ps -ef", "netstat -apn --inet","last -10"]
+        #t_cmds = ["ps -ef", "netstat -apn --inet","last -10"]
+        #t_cmds = [ ]
         data = data.replace("\n","")
-
-        if data not in t_cmds:
-          print("Caught an error.  Invalid command: " + str(data))
-
-        else:
-
-          results = subprocess.check_output(data, stderr=subprocess.STDOUT, shell=True)
-          print(str(clientsock.sendall(results)))
+        results = subprocess.check_output(data, stderr=subprocess.STDOUT, shell=True)
+        print(str(clientsock.sendall(results)))
 
 
 	# type 'close' on client console to close connection from the server side
